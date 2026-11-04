@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#45b8ee">
+  <meta name="description" content="A sunny walk with Garfield and notes from friends. Tap the cat to read a note.">
+  <title>Garfield · A little walk</title>
+  <link rel="icon" href="./assets/paw.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+  <script src="./game.js" defer></script>
+</head>
+<body>
+  <main class="world" id="world" aria-label="Garfield's sunny garden">
+    <div class="scene-controls">
+      <button class="scene-toggle" id="sceneToggle" type="button">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="9" cy="9" r="2"/><path d="m4 18 6-6 4 4 3-3 4 5"/></svg>
+        Scenes <span aria-hidden="true">→</span>
+      </button>
+    </div>
+        <img class="scene-background" id="background" src="./assets/background.png" alt="" width="768" height="1376" fetchpriority="high">
+        <p class="scene-note" aria-live="polite" aria-atomic="true">Tap Garfield. He has a few thoughts.</p>
+
+        <button class="character" id="garfield" type="button" aria-label="Talk to Garfield" aria-description="Tap or click to read a note. Drag to pick Garfield up, then release to drop him." aria-haspopup="dialog" aria-controls="dialogue" aria-expanded="false">
+          <span class="cat-shadow" aria-hidden="true"></span>
+          <span class="character-facing" id="characterFacing" aria-hidden="true">
+            <!-- Each walking part is a separate SVG group, animated in style.css. -->
+            <svg class="default-character" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+              <defs>
+                <linearGradient id="orange" x1="0" y1="0" x2="0.8" y2="1">
+                  <stop stop-color="#ffd05a"/><stop offset="0.6" stop-color="#ffad32"/><stop offset="1" stop-color="#ef7c22"/>
+                </linearGradient>
+                <linearGradient id="cream" x1="0" y1="0" x2="0.4" y2="1">
+                  <stop stop-color="#fff3b7"/><stop offset="1" stop-color="#ffe08b"/>
+                </linearGradient>
+                <pattern id="sarong-check" width="20" height="20" patternUnits="userSpaceOnUse">
+                  <path d="M0 0h20v20H0z" fill="#389b98"/>
+                  <path d="M0 5h20M5 0v20" stroke="#267b83" stroke-width="6"/>
+                  <path d="M0 15h20M15 0v20" stroke="#c2e1bc" stroke-width="1.5"/>
+                </pattern>
+              </defs>
+              <g stroke="#513021" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round">
+                <g class="cat-tail">
+                  <path d="M117 238C95 265 65 277 42 264C28 257 16 266 24 281C42 312 105 289 130 258Z" fill="url(#orange)"/>
+                  <path d="M27 268L47 274L27 279M44 282L55 291M70 278L78 286M96 264L104 274" fill="none" stroke-width="7"/>
+                </g>
+                <g class="cat-leg cat-leg-back">
+                  <path d="M178 248C177 266 186 281 185 294C196 288 221 286 237 293C249 299 247 312 231 314H179C163 314 161 304 162 291L158 254Z" fill="#ec8a2a"/>
+                  <path d="M222 297Q231 305 226 313M206 298Q213 306 210 313" fill="none" stroke-width="3"/>
+                  <path class="outfit outfit-city" d="M158 252L178 248Q178 271 185 291L164 294Z" fill="#344354" stroke="#263442" stroke-width="3"/>
+                </g>
+                <g class="cat-arm cat-arm-back">
+                  <path d="M201 174C226 181 237 206 232 228C230 241 217 244 210 233L192 196Z" fill="#ef8c29"/>
+                  <path d="M216 222L229 226M214 231L224 236" fill="none" stroke-width="3"/>
+                  <path class="outfit outfit-city" d="M201 174Q233 183 234 219L212 226L192 196Z" fill="#344354" stroke="#263442" stroke-width="3"/>
+                </g>
+                <g class="cat-body">
+                  <path d="M114 166C92 188 91 229 110 259C129 284 187 285 214 257C239 228 229 187 209 168Z" fill="url(#orange)"/>
+                  <ellipse cx="174" cy="228" rx="46" ry="48" fill="url(#cream)" stroke="none"/>
+                  <path d="M102 199L119 207L101 213M104 225L120 232L108 239" fill="none" stroke-width="6"/>
+                  <g class="outfit outfit-city" stroke="#263442" stroke-width="3">
+                    <path d="M114 166C92 188 91 229 110 259Q158 280 214 257C239 228 229 187 209 168L173 181Z" fill="#344354"/>
+                    <path d="M144 172L177 176L202 172L174 237Z" fill="#fff8e8"/>
+                    <path d="M171 180L182 187L175 198L181 225L171 238L164 224L169 197L163 187Z" fill="#be4e43" stroke="#883c39" stroke-width="2"/>
+                    <path d="M136 171L153 211L143 215L171 254L124 222Z" fill="#4d6073"/>
+                    <path d="M206 173L191 211L201 215L171 254L219 224Z" fill="#4d6073"/>
+                    <path d="M171 254V269M195 239H211" fill="none"/><circle cx="179" cy="256" r="2" fill="#e8c57f" stroke="none"/>
+                  </g>
+                </g>
+                <g class="cat-leg cat-leg-front">
+                  <path d="M133 252C132 270 132 283 124 295C119 307 126 314 142 315H191C211 314 214 300 201 294C186 286 165 289 159 293L164 257" fill="url(#orange)"/>
+                  <path d="M190 296Q200 303 195 313M173 297Q182 304 177 314" fill="none" stroke-width="3"/>
+                  <path class="outfit outfit-city" d="M133 252L164 257L160 287L128 294Q135 277 133 252Z" fill="#344354" stroke="#263442" stroke-width="3"/>
+                </g>
+                <g class="outfit outfit-srilanka cat-sarong" stroke="#285d63" stroke-width="3">
+                  <path d="M105 235Q161 252 222 236L223 288Q167 305 112 288Z" fill="url(#sarong-check)"/>
+                  <path d="M105 235Q161 252 222 236L222 245Q161 261 107 244Z" fill="#8fc9b0"/>
+                  <path d="M177 249L194 247L185 296L167 297Z" fill="#33878d"/>
+                  <path d="M182 251L176 287M114 287Q166 301 219 287" fill="none" stroke="#b4d5ad" stroke-width="2"/>
+                  <path d="M175 248Q162 234 169 231Q181 232 183 246Q191 233 199 239Q201 248 184 251Z" fill="#8fc9b0" stroke-width="2"/>
+                </g>
+                <g class="cat-arm cat-arm-front">
+                  <path d="M122 178C110 195 112 220 107 237C101 252 109 263 119 258C123 270 137 266 140 258C153 262 158 251 154 239L155 197" fill="url(#orange)"/>
+                  <path d="M116 244Q121 250 118 257M132 246Q138 252 136 261M116 203L126 208M113 216L123 221" fill="none" stroke-width="3.5"/>
+                  <g class="outfit outfit-city" stroke="#263442" stroke-width="3"><path d="M122 178Q110 195 109 231L153 234L155 197" fill="#344354"/><path d="M110 231L153 234L154 241L108 239Z" fill="#fff8e8"/></g>
+                </g>
+                <g class="cat-head">
+                  <path d="M100 93C88 69 93 37 126 29C143 24 147 46 144 62C161 55 180 56 192 61C197 43 218 30 235 36C250 44 238 74 230 90C259 109 264 146 245 167C225 193 115 201 89 169C71 148 76 112 100 93Z" fill="url(#orange)"/>
+                  <path d="M101 66Q109 41 130 36L120 60L138 45L137 66M202 65L225 42L216 63L237 45L230 76" fill="#b9622a" stroke="none"/>
+                  <path d="M95 109L109 101M89 125L104 116M88 142L102 135M94 158L109 152M108 171L124 170M245 115L235 107M249 131L239 123M247 151L237 143M232 169L220 163" fill="none" stroke-width="6"/>
+                  <path d="M157 63L153 79L164 68L169 82L178 65" fill="#513021" stroke-width="2"/>
+                  <path d="M111 140C108 126 123 122 136 131C147 119 165 120 181 132C196 120 213 120 225 132C240 126 247 137 241 148C235 159 225 155 222 153C212 176 188 178 179 157C166 181 136 179 125 158C117 160 109 152 111 140Z" fill="url(#cream)" stroke-width="3.5"/>
+                  <ellipse cx="151" cy="109" rx="29" ry="38" fill="#fffefa"/>
+                  <ellipse cx="205" cy="108" rx="27" ry="37" fill="#fffefa"/>
+                  <ellipse cx="159" cy="121" rx="8" ry="12" fill="#513021" stroke="none"/>
+                  <ellipse cx="207" cy="120" rx="8" ry="12" fill="#513021" stroke="none"/>
+                  <path d="M122 111C118 62 179 54 180 109Z" fill="url(#orange)" stroke-width="3.5"/>
+                  <path d="M180 109C178 62 231 59 232 105Z" fill="url(#orange)" stroke-width="3.5"/>
+                  <path d="M168 142C169 132 191 129 197 138C203 149 178 155 168 142Z" fill="#ee8d9b" stroke-width="3.5"/>
+                  <path d="M181 151L180 158M180 158Q194 175 211 157M180 158Q158 181 137 159" fill="none" stroke-width="3"/>
+                  <path d="M114 139H115M119 146H120M126 138H127M229 137H230M235 145H236M224 146H225" fill="none" stroke-width="3"/>
+                  <path d="M103 146L85 141M105 153L85 154M240 146L257 139M241 153L260 154" fill="none" stroke-width="2.5"/>
+                  <g class="outfit outfit-farm" stroke="#936126" stroke-width="3">
+                    <path d="M113 57L124 20Q168 2 211 24L221 61Z" fill="#e9bf66"/>
+                    <path d="M120 38Q167 25 216 43L220 59L115 56Z" fill="#bf5945"/>
+                    <ellipse cx="168" cy="64" rx="91" ry="16" fill="#f3d28a"/>
+                    <path d="M87 65Q167 81 249 64M130 24L127 34M146 19L145 31M165 18V29M185 21L187 33M204 27L207 38" fill="none" stroke="#c99947" stroke-width="2"/>
+                  </g>
+                  <g class="outfit outfit-moon" stroke-linejoin="round">
+                    <ellipse cx="171" cy="110" rx="99" ry="103" fill="#bcecff" fill-opacity=".12" stroke="#607f9a" stroke-width="10"/>
+                    <ellipse cx="171" cy="110" rx="97" ry="101" fill="none" stroke="#e9f7ff" stroke-width="6"/>
+                    <path d="M103 56Q120 26 150 23M102 72L97 83" fill="none" stroke="#fff" stroke-opacity=".8" stroke-width="6"/>
+                    <path d="M121 191Q171 212 221 191L223 206Q171 225 119 206Z" fill="#e6f0fa" stroke="#607f9a" stroke-width="3"/>
+                    <path d="M137 207H202" stroke="#a1b9d1" stroke-width="3"/><circle cx="215" cy="203" r="3" fill="#e7a64d" stroke="none"/>
+                  </g>
+                </g>
+              </g>
+            </svg>
+            <span class="sprite-frames" id="spriteFrames"></span>
+          </span>
+        </button>
+    <noscript><p class="noscript">Please enable JavaScript to walk and talk with Garfield.</p></noscript>
+  </main>
+
+  <dialog class="dialogue" id="dialogue" aria-labelledby="dialogueTitle" aria-describedby="messageText">
+    <div class="dialogue-header">
+      <div class="dialogue-identity">
+        <img src="./assets/paw.svg" alt="" width="38" height="38">
+        <div><h2 id="dialogueTitle">Garfield says…</h2></div>
+      </div>
+      <button class="close-button" id="closeDialogue" type="button" aria-label="Close dialogue" autofocus>×</button>
+    </div>
+    <div class="message-scroll" id="messageScroll" tabindex="0" aria-label="Message. Swipe left or right to change notes.">
+      <span class="quote-mark" aria-hidden="true">“</span>
+      <p class="message-text" id="messageText" role="status" aria-live="polite" aria-atomic="true">Just gathering my thoughts…</p>
+    </div>
+    <div class="dialogue-navigation">
+      <button class="nav-button" id="previousMessage" type="button" aria-label="Previous message"><span aria-hidden="true">←</span> Previous</button>
+      <span class="message-counter" id="messageCounter" aria-label="Message 1 of 1">1 / 1</span>
+      <button class="nav-button next-button" id="nextMessage" type="button" aria-label="Next message">Next <span aria-hidden="true">→</span></button>
+    </div>
+    <p class="swipe-tip">Swipe for another note <span aria-hidden="true">↔</span></p>
+  </dialog>
+</body>
+</html>

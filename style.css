@@ -1,0 +1,172 @@
+:root {
+  color-scheme: light;
+  --paper: #fffaf1;
+  --ink: #493325;
+  --orange: #ed742c;
+  --grass-level: 78%; /* Feet meet the grass here; also configurable in game.js. */
+  --character-size: 35%; /* Change Garfield's width relative to the scene. */
+  --step-duration: 0.72s;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  color: var(--ink);
+  background: #45b8ee;
+  -webkit-tap-highlight-color: transparent;
+}
+
+* { box-sizing: border-box; }
+html, body { width: 100%; height: 100%; overflow: hidden; }
+body { margin: 0; }
+button { touch-action: manipulation; }
+button { font: inherit; cursor: pointer; color: inherit; }
+button:focus-visible, .message-scroll:focus-visible {
+  outline: 3px solid #a84716;
+  outline-offset: 5px;
+}
+button:disabled { cursor: default; opacity: 0.4; }
+
+.world {
+  position: fixed;
+  inset: 0;
+  isolation: isolate;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  overflow: hidden;
+  background: #45b8ee url("./assets/background-fallback.svg") 50% var(--grass-level) / cover no-repeat;
+}
+.scene-background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Anchor the image's grass line to the same screen level as Garfield's feet. */
+  object-position: 50% var(--grass-level);
+  z-index: -1;
+  pointer-events: none;
+}
+.scene-note {
+  position: absolute;
+  bottom: max(5.8%, calc(env(safe-area-inset-bottom) + 12px));
+  left: 16px;
+  right: 16px;
+  margin: 0;
+  text-align: center;
+  font-size: clamp(11px, 2.8vw, 14px);
+  color: #fff8e6;
+  letter-spacing: 0.3px;
+  text-shadow: 0 1px 3px #33200b, 0 0 8px #33200b88;
+  pointer-events: none;
+}
+
+.scene-controls { position: absolute; z-index: 10; top: max(16px, env(safe-area-inset-top)); right: max(16px, env(safe-area-inset-right)); }
+.scene-toggle { display: flex; align-items: center; gap: 9px; min-height: 46px; padding: 10px 15px; border: 1px solid #ffffffaa; border-radius: 18px; background: #fffaf1ed; box-shadow: 0 4px 18px #213c4820; font-size: 13px; font-weight: 700; }
+.scene-toggle:hover { background: #fffaf1; }
+.outfit { display: none; }
+[data-scene="city"] .outfit-city, [data-scene="farm"] .outfit-farm, [data-scene="moon"] .outfit-moon, [data-scene="srilanka"] .outfit-srilanka { display: inline; }
+[data-scene="moon"] .cat-shadow { background: #111b3d66; }
+
+/* The button moves across the scene; only its inner artwork flips. */
+.character {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% - var(--grass-level));
+  width: clamp(92px, var(--character-size), 170px);
+  max-width: 58%;
+  aspect-ratio: 1;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+  border-radius: 38%;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none; /* Let a finger drag Garfield instead of scrolling the page. */
+  cursor: grab;
+}
+.character.is-dragging, .character:active { cursor: grabbing; }
+.character.is-pointer-focused:focus { outline: none; }
+.character.is-dragging:focus-visible { outline: none; }
+.character-facing { position: absolute; inset: 0; display: block; transform: scaleX(1); pointer-events: none; }
+.default-character { display: block; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 2px 1px #884f2328); }
+.cat-shadow { position: absolute; bottom: -2px; left: 28%; width: 50%; height: 6%; border-radius: 50%; background: #35752348; filter: blur(2px); pointer-events: none; }
+
+/* Pivot separate limbs to make a walk, rather than sliding a still image. */
+.cat-leg-front { transform-origin: 146px 255px; animation: front-step var(--step-duration) ease-in-out infinite; }
+.cat-leg-back { transform-origin: 178px 252px; animation: back-step var(--step-duration) ease-in-out infinite; }
+.cat-arm-front { transform-origin: 133px 179px; animation: arm-swing var(--step-duration) ease-in-out infinite; }
+.cat-arm-back { transform-origin: 203px 179px; animation: arm-swing var(--step-duration) ease-in-out infinite; animation-delay: calc(var(--step-duration) * -0.5); }
+.cat-tail { transform-origin: 120px 249px; animation: tail-sway calc(var(--step-duration) * 2) ease-in-out infinite; }
+.cat-head { transform-origin: 168px 164px; animation: head-settle var(--step-duration) ease-in-out infinite; }
+.cat-sarong { transform-origin: 166px 244px; animation: sarong-sway var(--step-duration) ease-in-out infinite; }
+.character:not(.is-walking) .default-character * { animation-play-state: paused; }
+@keyframes front-step {
+  0%, 100% { transform: translateX(-7px) rotate(9deg); }
+  50% { transform: translate(7px, -3px) rotate(-9deg); }
+}
+@keyframes back-step {
+  0%, 100% { transform: translate(7px, -3px) rotate(-9deg); }
+  50% { transform: translateX(-7px) rotate(9deg); }
+}
+@keyframes arm-swing { 0%, 100% { transform: rotate(-10deg); } 50% { transform: rotate(10deg); } }
+@keyframes tail-sway { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(7deg); } }
+@keyframes head-settle { 0%, 100% { transform: rotate(-0.8deg); } 50% { transform: rotate(0.8deg); } }
+@keyframes sarong-sway { 0%, 100% { transform: skewX(-1.5deg); } 50% { transform: skewX(1.5deg); } }
+.sprite-frames { position: absolute; inset: 0; display: none; }
+.sprite-frame { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; display: none; }
+.sprite-frame.is-current { display: block; }
+.has-sprites .default-character { visibility: hidden; }
+.has-sprites .sprite-frames { display: block; }
+
+.noscript { position: absolute; top: 30%; left: 16px; right: 16px; text-align: center; font-size: 13px; }
+
+.dialogue {
+  width: min(460px, calc(100% - 32px));
+  max-height: calc(100dvh - 32px);
+  padding: 26px;
+  margin: auto;
+  border: 1px solid #e5d5ba;
+  border-radius: 25px;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 22px 90px #18281d45;
+  overflow: auto;
+}
+.dialogue[open] { display: flex; flex-direction: column; animation: dialogue-in 180ms ease-out; }
+.dialogue::backdrop { background: #193d4855; backdrop-filter: blur(5px); }
+.dialogue-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-shrink: 0; }
+.dialogue-identity { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.dialogue-identity > div { min-width: 0; }
+.dialogue-identity > img { flex-shrink: 0; }
+.dialogue h2 { font: 700 23px/1.3 Georgia, "Times New Roman", serif; margin: 0; letter-spacing: -0.6px; overflow-wrap: anywhere; }
+.close-button { flex-shrink: 0; min-width: 44px; height: 44px; padding: 0; background: #f1e8d9; border: 0; border-radius: 50%; font: 27px/1 Arial, sans-serif; }
+.close-button:hover { background: #e8dcc7; }
+.message-scroll { min-height: 140px; max-height: 42dvh; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #dfc5a0 transparent; touch-action: pan-y; margin: 22px 0; padding: 0 6px 6px 0; flex: 0 1 auto; overflow-wrap: anywhere; }
+.quote-mark { display: block; color: var(--orange); font: 64px/0.9 Georgia, serif; height: 42px; }
+.message-text { font: 500 25px/1.45 Georgia, "Times New Roman", serif; margin: 3px 0 0; white-space: pre-wrap; }
+.dialogue-navigation { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 18px; border-top: 1px solid #e7dbc8; flex-shrink: 0; }
+.nav-button { display: inline-flex; justify-content: center; align-items: center; gap: 9px; min-height: 46px; padding: 11px 15px; border-radius: 13px; border: 1px solid #dfd1bb; background: transparent; font-size: 12px; font-weight: 700; }
+.nav-button:hover:enabled { background: #f0e6d6; }
+.next-button { background: var(--orange); color: #fffdf7; border-color: var(--orange); }
+.next-button:hover:enabled { background: #d85e1e; border-color: #d85e1e; }
+.message-counter { color: #8a7257; font-size: 11px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.swipe-tip { margin: 17px 0 0; text-align: center; font-size: 9px; letter-spacing: 0.2px; color: #9a8265; flex-shrink: 0; }
+.swipe-tip span { font-size: 15px; margin-left: 3px; }
+@keyframes dialogue-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 380px) {
+  .dialogue { padding: 21px; }
+  .dialogue h2 { font-size: 21px; }
+  .message-text { font-size: 23px; }
+  .nav-button { padding: 10px 12px; gap: 6px; }
+  .dialogue-navigation { gap: 8px; }
+}
+@media (max-height: 540px) and (min-width: 600px) {
+  .dialogue { padding: 20px; }
+  .message-scroll { margin: 12px 0; min-height: 70px; max-height: 30dvh; }
+  .message-text { font-size: 21px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cat-tail, .cat-head, .cat-sarong { animation: none; }
+  .dialogue[open] { animation: none; }
+}

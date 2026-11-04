@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1000" viewBox="0 0 1440 1000">
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#9dd6e8"/><stop offset="1" stop-color="#fff0cc"/></linearGradient>
+    <linearGradient id="earth" x2="0" y2="1"><stop stop-color="#e6c79a"/><stop offset="1" stop-color="#d4ad7d"/></linearGradient>
+    <pattern id="tiles" width="24" height="16" patternUnits="userSpaceOnUse"><path d="M0 15h24M0 0q6 6 12 0t12 0M12 1v13" fill="none" stroke="#a86248" stroke-width="1.6"/></pattern>
+    <!-- Narrow leaflets along a curved rib, rather than broad banana leaves. -->
+    <g id="palm-frond" fill="#548c64">
+      <path d="M0 0Q70-39 154 37" fill="none" stroke="#426e50" stroke-width="3" stroke-linecap="round"/>
+      <path d="M16-7Q18-30 33-45Q23-18 16-7ZM16-7Q42 0 54 23Q29 8 16-7Z"/>
+      <path d="M34-12Q41-39 57-48Q44-23 34-12ZM34-12Q59 1 64 27Q47 7 34-12Z"/>
+      <path d="M54-13Q64-40 81-43Q66-23 54-13ZM54-13Q78 4 78 31Q65 10 54-13Z"/>
+      <path d="M74-9Q88-34 105-32Q86-17 74-9ZM74-9Q96 12 93 39Q84 15 74-9Z"/>
+      <path d="M94-1Q112-22 129-16Q108-6 94-1ZM94-1Q112 20 108 46Q103 24 94-1Z"/>
+      <path d="M113 10Q133-7 147 2Q129 8 113 10ZM113 10Q128 31 122 53Q118 31 113 10Z"/>
+      <path d="M132 23Q148 14 161 24L132 23ZM132 23Q145 39 140 58Q137 38 132 23ZM144 31L166 44L153 37Z"/>
+    </g>
+    <g id="palm">
+      <path d="M-10 310Q17 171-6 5L4-3Q32 168 7 310Z" fill="#9d8258"/>
+      <path d="M-10 310Q17 171-6 5L-1 3Q25 172-3 310Z" fill="#b19a71"/>
+      <path d="M-6 282q8 4 16 0M-1 251q8 4 16 0M3 219q7 4 15 0M5 187q7 4 15 0M5 155q7 4 14 0M3 123q7 4 13 0M0 91q7 4 12 0M-2 60q6 4 12 0" fill="none" stroke="#806a48" stroke-width="2.5"/>
+      <use href="#palm-frond" transform="rotate(-71) scale(.8)"/>
+      <use href="#palm-frond" transform="scale(-1 1) rotate(-57) scale(.9)"/>
+      <use href="#palm-frond" transform="rotate(-27)"/>
+      <use href="#palm-frond" transform="scale(-1 1) rotate(-20)"/>
+      <use href="#palm-frond" transform="rotate(14) scale(1.06)"/>
+      <use href="#palm-frond" transform="scale(-1 1) rotate(23) scale(1.03)"/>
+      <use href="#palm-frond" transform="rotate(54) scale(.77)"/>
+      <g fill="#82734a" stroke="#6e6345" stroke-width="1.5"><circle cx="-6" cy="12" r="7"/><circle cx="8" cy="15" r="8"/><circle cx="0" cy="25" r="7"/></g>
+    </g>
+  </defs>
+  <path d="M0 0h1440v1000H0z" fill="url(#sky)"/>
+  <circle cx="824" cy="242" r="62" fill="#ffe5a3"/><circle cx="808" cy="230" r="41" fill="#ffedb9"/>
+  <g fill="#fffbed" opacity=".85"><path d="M470 298q-8-28 23-34 15-44 49-16 36-19 50 16 48-1 55 25-1 17-45 17H501Z"/><path d="M969 355q-5-24 20-29 14-37 43-13 31-16 43 14 40 0 47 21-2 17-40 17h-84Z"/></g>
+  <path d="M0 634L139 542 297 590 442 496 586 563 740 463 899 549 1030 501 1218 585 1440 521v479H0Z" fill="#9ab9a4"/>
+  <path d="M0 682Q208 569 428 641T843 606T1230 645T1440 619v381H0Z" fill="#87ad83"/>
+  <path d="M0 716Q270 656 523 693T982 677T1440 700v300H0Z" fill="#abc66e"/>
+  <g fill="none" stroke="#cbd791" stroke-width="7"><path d="M0 726Q261 684 434 716M940 700l500 46M1006 724l434 47M55 756l358-28"/></g>
+  <!-- Palms stand behind the house, with tapered trunks and feathered fronds. -->
+  <use href="#palm" transform="translate(411 380) scale(1.15)"/>
+  <use href="#palm" transform="translate(914 324) scale(1.34)"/>
+  <use href="#palm" transform="translate(1166 462) scale(.85)"/>
+  <!-- One-storey tiled house: shaded veranda, timber door, shutters and steps. -->
+  <g transform="translate(137 104) scale(.86)" stroke="#9d7b56" stroke-width="4" stroke-linejoin="round">
+    <path d="M442 577H689V733H442Z" fill="#f3e3bb"/>
+    <path d="M689 577L711 568V725L689 733Z" fill="#d8c39a"/>
+    <path d="M414 584L470 509H659L719 584Z" fill="#c98461"/>
+    <path d="M414 584L470 509H659L719 584Z" fill="url(#tiles)"/>
+    <path d="M414 584h305" fill="none" stroke="#985e46" stroke-width="7"/>
+    <path d="M444 591h243" stroke="#c8b18a" stroke-width="6"/>
+    <rect x="549" y="600" width="34" height="14" rx="2" fill="#a79876" stroke="none"/>
+    <path d="M558 602v10M567 602v10M576 602v10" stroke="#efdfb5" stroke-width="3"/>
+    <path d="M448 643H687V731H448Z" fill="#7f7758" opacity=".12" stroke="none"/>
+    <rect x="552" y="641" width="55" height="92" rx="2" fill="#8d7456" stroke="#ae916b" stroke-width="5"/>
+    <path d="M580 645v84M557 674h46M557 705h46" stroke="#6f614b" stroke-width="2"/>
+    <circle cx="594" cy="688" r="3" fill="#e8d3a3" stroke="none"/>
+    <g stroke="#e4d2a9" stroke-width="4"><rect x="477" y="650" width="40" height="44" fill="#587f75"/><path d="M497 652v40M480 671h34"/><rect x="631" y="650" width="35" height="44" fill="#587f75"/><path d="M648 652v40M634 671h29"/></g>
+    <g fill="#9c8862" stroke-width="2"><path d="M466 647h8v50h-8ZM520 647h8v50h-8ZM621 647h7v50h-7ZM669 647h7v50h-7Z"/></g>
+    <path d="M422 644L450 615H690L718 644Z" fill="#c27d59"/>
+    <path d="M422 644L450 615H690L718 644Z" fill="url(#tiles)"/>
+    <path d="M422 644h296" stroke="#925d43" stroke-width="5"/>
+    <path d="M444 648v86M697 648v86" stroke="#ebdab4" stroke-width="9"/>
+    <path d="M434 735h274v9H434Z" fill="#b6a17d" stroke-width="2"/>
+    <path d="M425 744h293v8H425Z" fill="#c6b28e" stroke-width="2"/>
+  </g>
+  <path d="M1440 680Q1068 662 962 722T528 750T0 741v72h1440Z" fill="#d7bc8c"/>
+  <!-- Side view: a rear passenger bench, separate front driver seat and handlebars. -->
+  <g stroke="#4b5956" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <ellipse cx="825" cy="745" rx="105" ry="9" fill="#77825b" fill-opacity=".25" stroke="none"/>
+    <circle cx="756" cy="725" r="18" fill="#384a48"/>
+    <!-- Canvas canopy and rear panel. The two side openings are not glazed. -->
+    <path d="M741 680V619Q740 601 759 599H847Q868 599 877 624L866 630Q815 615 755 625V680Z" fill="#394b47"/>
+    <path d="M750 615Q806 604 863 619" fill="none" stroke="#748074" stroke-width="3"/>
+    <path d="M756 627H821V695H756Z" fill="#647b69" fill-opacity=".55" stroke="none"/>
+    <path d="M831 630H866L882 688H831Z" fill="#8fa68d" fill-opacity=".35" stroke="none"/>
+    <g id="rear-passenger-seat" stroke="#635b49" stroke-width="2.5">
+      <rect x="758" y="640" width="12" height="35" rx="4" fill="#ac8d66"/>
+      <path d="M768 667h43q5 0 5 5v8h-48Z" fill="#b79970"/>
+      <path d="M769 681h46v7h-46Z" fill="#76664e"/>
+    </g>
+    <!-- Upright partition separates the rear passengers from the driver. -->
+    <path d="M826 624v79" stroke="#455a50" stroke-width="6"/>
+    <g id="front-driver-seat" stroke="#635b49" stroke-width="2.5">
+      <rect x="836" y="649" width="9" height="32" rx="3" fill="#a88a62"/>
+      <rect x="841" y="676" width="22" height="9" rx="3" fill="#b79970"/>
+      <path d="M846 686v12" stroke="#475b51" stroke-width="4"/>
+    </g>
+    <path d="M866 626L882 633L902 687L886 689Z" fill="#aed6ce"/>
+    <path d="M874 639l7 3 12 35-8 1Z" fill="#dcece0" stroke="none"/>
+    <path d="M861 663l17-5M874 658l-3 9 16 32" fill="none" stroke-width="3"/>
+    <path d="M741 681H757V694H821V705H875L886 685L904 690L919 705V724H741Z" fill="#c76950"/>
+    <path d="M748 708h65M888 705h20" stroke="#edd09a" stroke-width="4"/>
+    <path d="M824 704h45v8h-45Z" fill="#687669" stroke-width="2"/>
+    <path d="M911 697h10v11h-10Z" fill="#ffebac" stroke-width="2"/>
+    <rect x="744" y="697" width="7" height="14" rx="2" fill="#e7ab79" stroke="none"/>
+    <path d="M741 729h181" fill="none" stroke="#53605a" stroke-width="7"/>
+    <circle cx="770" cy="727" r="22" fill="#354745"/><circle cx="900" cy="727" r="22" fill="#354745"/>
+    <circle cx="770" cy="727" r="10" fill="#b9c3ad" stroke-width="3"/><circle cx="900" cy="727" r="10" fill="#b9c3ad" stroke-width="3"/>
+  </g>
+  <g fill="#78a16a"><path d="M283 779v-55q-50-45-69-18 48 12 69 39-11-70 17-75 17 43-12 76 34-58 64-28-41 9-64 36v25Z"/><path d="M1106 780v-51q-41-36-61-15 40 10 61 32-9-62 15-67 17 38-11 67 31-45 55-24-35 9-55 31v27Z"/></g>
+  <!-- The walking surface is exactly 78% down, matching every other scene. -->
+  <path d="M0 780h1440v220H0z" fill="url(#earth)"/><path d="M0 780h1440" stroke="#c7b47d" stroke-width="4"/>
+  <path d="M0 898Q342 861 660 912T1440 885" fill="none" stroke="#ebd4ab" stroke-width="16" opacity=".65"/>
+  <g fill="#ba986c"><ellipse cx="568" cy="847" rx="7" ry="3"/><ellipse cx="862" cy="908" rx="9" ry="4"/><ellipse cx="748" cy="972" rx="6" ry="3"/></g>
+  <g fill="#a0ad65"><path d="M505 939l-8-17 13 10 4-20 6 21 10-11-6 17M965 858l-6-14 11 8 4-18 5 19 10-10-6 15"/></g>
+</svg>
